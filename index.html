@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Gastos Noel">
-  <meta name="description" content="Control de gastos personales">
+  <meta name="description" content="Control de gastos personales de Noel">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <title>Gastos Noel</title>
@@ -281,8 +281,8 @@ body { background: var(--bg); }
       <div class="brand">
         <div class="mark">🌷</div>
         <div>
-          <h1>Gastos Noel</h1>
-          <p>Aalsmeer · en euros</p>
+          <h1>Noel</h1>
+          <p>Mis gastos · en euros</p>
         </div>
       </div>
       <button class="icon-btn" id="exportBtn" title="Exportar">⬇</button>
@@ -340,7 +340,7 @@ body { background: var(--bg); }
   "use strict";
 
   // ---------- Config ----------
-  var STORAGE_KEY = "gastos_noel_v1";
+  var STORAGE_KEY = "gastos_data_noel_v1";
   var CATS = [
     { id: "vivienda",      label: "Habitación / Vivienda", emoji: "🏠", color: "#14543C", type: "fija" },
     { id: "suministros",   label: "Suministros y casa",    emoji: "💡", color: "#3A6B5A", type: "fija" },
@@ -728,7 +728,7 @@ body { background: var(--bg); }
       "fecha en formato YYYY-MM-DD si aparece, si no null. " +
       "concepto = nombre del comercio o descripción del movimiento tal como aparece. " +
       "categoria = el id que MEJOR encaje de esta lista: " + ids + ". " +
-      "El usuario vive en Aalsmeer (Países Bajos) y a veces gasta en Valencia (España). " +
+      "El usuario vive en España. " +
       "Si en un movimiento del banco aparece el nombre de un comercio o establecimiento que no reconoces (códigos tipo 'CCV*...', 'SUMUP*...', 'PAYPAL*...', nombres de tiendas o bares), USA la herramienta de búsqueda web para averiguar qué tipo de negocio es y dónde está, y así clasificarlo correctamente. " +
       'Pon "seguro": true SOLO si estás razonablemente seguro de la categoría (tras buscar si hace falta). ' +
       'Si entiendes el gasto pero no encaja en ninguna categoría, usa "otros". ' +
@@ -964,7 +964,7 @@ body { background: var(--bg); }
         model: "claude-sonnet-4-20250514",
         max_tokens: 1024,
         tools: [{ type: "web_search_20250305", name: "web_search" }],
-        messages: [{ role: "user", content: 'Clasifica este gasto en una categoría. Concepto: "' + text + '". El usuario vive en Aalsmeer (Países Bajos). Si el concepto es un nombre de comercio o establecimiento que no reconoces, busca en la web qué tipo de negocio es. Categorías (id y significado): ' + ids + '. Tu última palabra debe ser SOLO el id que mejor encaje. Si no encaja en ninguna, responde otros.' }]
+        messages: [{ role: "user", content: 'Clasifica este gasto en una categoría. Concepto: "' + text + '". El usuario vive en España. Si el concepto es un nombre de comercio o establecimiento que no reconoces, busca en la web qué tipo de negocio es. Categorías (id y significado): ' + ids + '. Tu última palabra debe ser SOLO el id que mejor encaje. Si no encaja en ninguna, responde otros.' }]
       })
     }).then(function (r) { return r.json(); }).then(function (data) {
       var t = (data.content || []).map(function (b) { return b.type === "text" ? b.text : ""; }).join(" ").toLowerCase();
