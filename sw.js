@@ -1,4 +1,4 @@
-var CACHE = 'gastos-noel-v1';
+var CACHE = 'gastos-noel-v2';
 var FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
